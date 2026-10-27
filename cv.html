@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV — Jiaheng Zheng</title>
+  <meta name="description" content="Curriculum Vitae of Jiaheng Zheng, undergraduate student at Southern University of Science and Technology (SUSTech).">
+  <style>
+    :root {
+      --navy: #043361;
+      --blue: #0284c7;
+      --text: #374151;
+      --muted: #6b7280;
+      --line: #dbe4ee;
+      --soft: #f4f7fa;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { font-size: 15px; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      padding: 34px 18px;
+      background: #edf2f7;
+      color: var(--text);
+      font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 56px 42px;
+      background: #fff;
+      box-shadow: 0 12px 34px rgba(4, 51, 97, .12);
+    }
+    .cv-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-bottom: 22px;
+      border-bottom: 3px solid var(--navy);
+    }
+    .cv-logo {
+      width: 66px;
+      height: 66px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .cv-header h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 2.35rem;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+    }
+    .cv-subtitle {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .92rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    .contact a { color: var(--blue); }
+    section { margin-top: 27px; }
+    h2 {
+      margin: 0 0 13px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+      color: var(--navy);
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h3 {
+      margin: 20px 0 10px;
+      color: var(--navy);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    h3:first-of-type { margin-top: 0; }
+    p { margin: 0 0 9px; }
+    .entry { margin-bottom: 19px; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .entry-title {
+      color: #1f2937;
+      font-weight: 700;
+    }
+    .entry-date {
+      color: var(--muted);
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+    .entry-sub {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+      margin-top: 2px;
+      color: #4b5563;
+      font-size: .92rem;
+      font-style: italic;
+    }
+    .entry-loc {
+      color: var(--muted);
+      font-size: .86rem;
+      font-style: normal;
+      white-space: nowrap;
+    }
+    .entry-note {
+      margin-top: 2px;
+      color: #4b5563;
+      font-size: .92rem;
+    }
+    ul {
+      margin: 7px 0 0 20px;
+      padding: 0;
+    }
+    li { margin-bottom: 4px; }
+    .interest-list { margin-top: 0; }
+    .interest-list li { margin-bottom: 5px; }
+    .skills {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 6px 18px;
+      margin: 0;
+    }
+    .skills dt {
+      color: #1f2937;
+      font-weight: 700;
+    }
+    .skills dd { margin: 0; }
+    .honor {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .honor strong { color: #1f2937; }
+    .honor span { color: var(--muted); font-size: .86rem; white-space: nowrap; }
+    .print-btn {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--navy);
+      box-shadow: 0 6px 18px rgba(4, 51, 97, .28);
+      color: #fff;
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .print-btn:hover { background: #06507f; text-decoration: none; }
+    @media (max-width: 680px) {
+      body { padding: 14px 8px; }
+      .page { padding: 28px 22px 34px; }
+      .cv-header { align-items: flex-start; gap: 16px; }
+      .cv-logo { width: 52px; height: 52px; }
+      .cv-header h1 { font-size: 1.8rem; }
+      .entry-head, .entry-sub, .honor { flex-direction: column; gap: 1px; }
+      .entry-date, .entry-loc, .honor span { white-space: normal; }
+      .skills { grid-template-columns: 1fr; gap: 2px; }
+      .skills dd { margin-bottom: 9px; }
+      .print-btn { right: 14px; bottom: 14px; }
+    }
+    @media print {
+      @page { size: A4; margin: 14mm 15mm; }
+      body { padding: 0; background: #fff; font-size: 9.7pt; line-height: 1.4; }
+      .page { max-width: none; margin: 0; padding: 0; box-shadow: none; }
+      .print-btn { display: none; }
+      .cv-header { gap: 16px; padding-bottom: 12px; border-bottom-width: 2px; }
+      .cv-logo { width: 48px; height: 48px; }
+      .cv-header h1 { font-size: 24pt; }
+      .contact { margin-top: 5px; font-size: 8.5pt; gap: 4px 12px; }
+      section { margin-top: 14px; }
+      h2 { margin-bottom: 8px; padding-bottom: 3px; font-size: 9.5pt; }
+      h3 { margin: 11px 0 6px; font-size: 9.7pt; }
+      .entry { margin-bottom: 10px; }
+      li { margin-bottom: 2px; }
+      .entry-date, .entry-loc, .honor span { font-size: 8.3pt; }
+      .entry-sub, .entry-note { font-size: 8.8pt; }
+      .skills { grid-template-columns: 105px 1fr; gap: 2px 12px; }
+      a { color: inherit; text-decoration: none; }
+      .entry, section, .skills { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="cv-header">
+      <img class="cv-logo" src="images/sustech.png" alt="SUSTech logo">
+      <div>
+        <h1>Jiaheng Zheng</h1>
+        <div class="cv-subtitle">CV</div>
+        <div class="contact">
+          <a href="mailto:12411408@mail.sustech.edu.cn">12411408@mail.sustech.edu.cn</a>
+          <span>+86 186 7883 1898</span>
+          <span>Shenzhen, China</span>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Southern University of Science and Technology</div>
+          <div class="entry-date">Sep. 2024 – Jul. 2028 (Expected)</div>
+        </div>
+        <div class="entry-sub">
+          <span>Bachelor of Optoelectronic Information Science and Engineering</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <ul>
+          <li>GPA: 3.94/4</li>
+          <li>Rank: 2/42</li>
+          <li>Selected Coursework: Signal and System (99), Analog Circuit (96), Engineering Electromagnetic Field Theory (99), Solid-State Electronics (98), Advanced Mathematics (Part 2) (99)</li>
+          <li>Other coursework I’m interested in (in progress): Stanford CS224N, CS336, MIT 6.S184, Quantum Mechanics</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">University of Pennsylvania</div>
+          <div class="entry-date">Jan. 2027 – TBD</div>
+        </div>
+        <div class="entry-sub">
+          <span>Incoming Visiting Student, IGSP Program</span>
+          <span class="entry-loc">Philadelphia, PA, USA</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Research Interests</h2>
+      <p>My research interests span artificial intelligence and photonics, with particular emphasis on:</p>
+      <ul class="interest-list">
+        <li><strong>Artificial Intelligence:</strong> Natural language processing (NLP), multimodal agents, world models, and hallucination in AI agents.</li>
+        <li><strong>Physics and Photonics:</strong> Topological spacetime crystals, photonic integrated circuits, optical computing, and optical neural networks.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Programs</h2>
+
+      <h3>Physics</h3>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Observation of a Moving Spatiotemporal Boundary in a Transmission Line System</div>
+          <div class="entry-date">Sep. 2025 – Present</div>
+        </div>
+        <div class="entry-sub">
+          <span>Undergraduate Research Assistant, advised by Prof. Zhen Gao</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <div class="entry-note">Artificial Microstructure Physics Research Group, SUSTech</div>
+        <ul>
+          <li>Developed MATLAB FDTD simulations of LC transmission lines with up to 1,600 cells to study wave propagation under temporal, traveling-wave, and separable space-time modulation.</li>
+          <li>Computed Floquet–Bloch dispersion and weighted Zak phases to analyze bandgaps; investigated moving-interface modes using source-free eigenproblems, localization metrics, and numerical convergence checks.</li>
+          <li>Modeled varactor circuits in Python and derived bias waveforms for spatiotemporal capacitance control, accounting for nonlinear capacitance-voltage characteristics, circuit loading, and switching transients.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Research on Computational Optical Imaging</div>
+          <div class="entry-date">Nov. 2024 – Aug. 2025</div>
+        </div>
+        <div class="entry-sub">
+          <span>Research Assistant, advised by Prof. Jingwen Ma</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <div class="entry-note">M-Lab, SUSTech</div>
+        <ul>
+          <li>Studied the fundamentals of computational optical imaging and developed practical skills in constructing simple optical setups.</li>
+          <li>Explored the integration of optical imaging principles with advanced electronics.</li>
+        </ul>
+      </div>
+
+      <h3>Artificial Intelligence</h3>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Transformer-Based Machine Translation</div>
+          <div class="entry-date">Aug. 2026 – Oct. 2026</div>
+        </div>
+        <div class="entry-sub">
+          <span>Independent Project</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <div class="entry-note">Model Reproduction and Fine-Tuning</div>
+        <ul>
+          <li>Reproduced a Transformer-based model for English-to-Italian machine translation.</li>
+          <li>Fine-tuned the model using Altair for the target translation task.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Statistically Guaranteed Remasking for Diffusion Language Models</div>
+          <div class="entry-date">Sep. 2026 – Present</div>
+        </div>
+        <div class="entry-sub">
+          <span>Research Assistant, advised by Prof. Zhenyi Wang</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <div class="entry-note">Conformal Prediction and Statistical Guarantees</div>
+        <ul>
+          <li>Developing a training-free, model-agnostic remasking strategy for masked diffusion language models, replacing CORE’s hand-tuned remasking budget with a conformal threshold to target finite-sample control of the fraction of incorrect tokens left unrevised.</li>
+          <li>Extending calibration to non-stationary streams through adaptive conformal inference, with online updates to the target miscoverage parameter and a dynamic step size guided by a distribution-shift signal.</li>
+          <li>Evaluating the method on LLaDA-8B-Base across GSM8K, MATH, BBH, HumanEval, and MBPP against fixed-budget remasking and adaptive conformal baselines.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Community &amp; Leadership</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Member, Apex Honors Class of Basic Sciences (SUSTech APEX Program)</div>
+          <div class="entry-date">Sep. 2025 – Present</div>
+        </div>
+        <div class="entry-sub">
+          <span>Southern University of Science and Technology</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <ul>
+          <li>Selected for a highly selective honors program in basic sciences (Top 1% of all SUSTech students).</li>
+          <li>The program offers advanced mathematics and physics coursework, faculty mentorship, and interdisciplinary research seminars.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div class="entry-title">Class Monitor, Wolong Class (Electronic Information)</div>
+          <div class="entry-date">Sep. 2025 – Present</div>
+        </div>
+        <div class="entry-sub">
+          <span>Department of Electrical and Electronic Engineering</span>
+          <span class="entry-loc">Shenzhen, China</span>
+        </div>
+        <ul>
+          <li>Selected for the Wolong Class (Top 10% of EEE students).</li>
+          <li>Collaborate with faculty members across the Department of Electrical and Electronic Engineering on research activities.</li>
+          <li>Represent classmates, coordinate communication with faculty, and organize class activities to strengthen class cohesion.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Honors</h2>
+      <div class="honor">
+        <strong>First-Class Scholarship for Outstanding Students, SUSTech, 2025</strong>
+        <span>September 2025</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <dl class="skills">
+        <dt>Programming</dt>
+        <dd>Python, C, Verilog</dd>
+        <dt>AI &amp; ML</dt>
+        <dd>PyTorch, Hugging Face Transformers, NumPy, Pandas, scikit-learn</dd>
+        <dt>Tools</dt>
+        <dd>Git, Linux, Jupyter Notebook</dd>
+        <dt>Simulation</dt>
+        <dd>FDTD, COMSOL, TCAD</dd>
+        <dt>Languages</dt>
+        <dd>Mandarin (native), English (proficient; TOEFL: 5.5/110)</dd>
+      </dl>
+    </section>
+
+    <a class="print-btn" href="cv.pdf" target="_blank" rel="noopener">↓ Download PDF</a>
+  </main>
+</body>
+</html>

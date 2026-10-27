@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jiaheng Zheng</title>
+  <meta name="description" content="Jiaheng Zheng is an undergraduate student in the Department of Electrical and Electronic Engineering at SUSTech, interested in RLHF, post-training, world models, optical neural networks, and topological spatiotemporal crystals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      } catch (e) {}
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --accent: #b08d57;
+      --accent-soft: #f4ecdf;
+      --accent-glow: rgba(176, 141, 87, .10);
+      --text: #1f2933;
+      --muted: #5b6573;
+      --faint: #8a94a3;
+      --border: #e8e8e8;
+      --border-strong: #d8d2c8;
+      --bg: #ffffff;
+      --bg-alt: #f7f8fa;
+      --page-bg: #f4f1ea;
+      --hero: linear-gradient(135deg, #f8f4eb 0%, #e7effa 25%, #cfe0f6 52%, #d8d3ec 76%, #f8f4eb 100%);
+      --shadow: 0 18px 50px rgba(80, 65, 45, .13);
+      --serif: Georgia, "Times New Roman", serif;
+      --display-serif: Georgia, "Times New Roman", serif;
+      --sidebar-ink: #000000;
+      --sidebar-text: #595959;
+      --max-w: 980px;
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --accent: #d4b483;
+      --accent-soft: #2a241c;
+      --accent-glow: rgba(212, 180, 131, .12);
+      --text: #e5e5e5;
+      --muted: #b0b0b0;
+      --faint: #888888;
+      --border: #2e2e2e;
+      --border-strong: #444444;
+      --bg: #141414;
+      --bg-alt: #1c1c1c;
+      --page-bg: #0d0d0d;
+      --hero: linear-gradient(135deg, #16223a 0%, #1e3050 40%, #2a406b 70%, #1b1a2e 100%);
+      --shadow: 0 18px 50px rgba(0, 0, 0, .5);
+      --sidebar-ink: #ffffff;
+      --sidebar-text: #b0b0b0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      padding: 64px 0 0;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color .25s, color .25s;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+
+    /* Navbar */
+    .site {
+      width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: visible;
+    }
+    .theme-toggle.floating {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1000;
+      background: var(--bg);
+      border-color: var(--border-strong);
+    }
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px 0 34px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .nav-brand { color: var(--text); font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+    .nav-brand:hover { color: var(--accent); text-decoration: none; }
+    #nav-links {
+      position: absolute;
+      left: calc(50% - 170px);
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+    #nav-links a { color: var(--muted); font-size: 13.5px; font-weight: 500; padding: 7px 12px; border-radius: 8px; }
+    #nav-links a:hover, #nav-links a.active { color: var(--text); background: var(--bg-alt); text-decoration: none; }
+    .nav-theme { display: flex; align-items: center; margin-left: 6px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font: inherit;
+    }
+    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+    .theme-toggle .sun-icon { display: none; width: 17px; height: 17px; }
+    :root[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
+    :root[data-theme="dark"] .theme-toggle .sun-icon { display: block; }
+    :root[data-theme="dark"] .tag.current { color: #0f1726; }
+    :root[data-theme="dark"] .venue { color: #0f1726; }
+    :root[data-theme="dark"] .venue.report { color: #fff; }
+
+    /* Two-column card layout */
+    .layout {
+      position: relative;
+      width: 960px;
+      max-width: calc(100% - 40px);
+      margin: 0 auto;
+      padding: 50px 0 80px;
+    }
+    .profile-sidebar {
+      position: fixed;
+      top: 44%;
+      left: max(24px, calc(25% - 186px));
+      transform: translateY(-58%);
+      width: 232px;
+      text-align: center;
+    }
+    .sidebar-photo {
+      width: 170px;
+      height: 190px;
+      margin: 0 auto;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position: center 22%;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .sidebar-name { margin-top: 15px; font-family: var(--serif); font-size: 1.7rem; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; color: var(--sidebar-ink); }
+    .sidebar-role { margin-top: 22px; color: var(--sidebar-text); font-size: 17px; font-weight: 400; }
+    .sidebar-school { margin-top: 2px; color: var(--sidebar-text); font-size: 15px; line-height: 1.45; }
+    .sidebar-email { display: block; margin-top: 3px; color: var(--sidebar-text); font-size: 14px; }
+    .sidebar-email:hover { color: var(--accent); }
+    .sidebar-icons { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 20px; color: var(--sidebar-ink); font-size: 18px; }
+    .sidebar-icons a, .sidebar-icons span {
+      color: var(--sidebar-ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      font-size: 18px;
+    }
+    .sidebar-icons a:hover { color: var(--sidebar-ink); opacity: .65; }
+    .research-box { margin-top: 22px; padding: 14px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; text-align: left; }
+    .research-title { margin-bottom: 8px; color: var(--faint); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .research-box ul { list-style: none; display: grid; gap: 5px; }
+    .research-box li { color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+    .research-box .focus { color: var(--faint); font-size: 11px; }
+    .content {
+      width: 650px;
+      max-width: 100%;
+      margin-left: 310px;
+      min-width: 0;
+    }
+    .content p { margin: 0 0 9px; }
+    .content p:last-child { margin-bottom: 0; }
+    .content .section { padding-top: 0; margin-bottom: 30px; }
+    .content .section:last-child { margin-bottom: 0; }
+
+    /* Hero (unused) */
+    .hero { padding: 38px 0 8px; }
+    .hero-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(280px, .82fr);
+      gap: 34px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--hero);
+      box-shadow: var(--shadow);
+    }
+    .profile-row { display: flex; align-items: center; gap: 20px; }
+    .profile-photo {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 22%;
+      border: 4px solid var(--bg);
+      outline: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .hero h1 { font-size: 2rem; line-height: 1.15; letter-spacing: -.035em; color: var(--text); }
+    .bio-role { margin-top: 6px; color: var(--muted); font-size: 14.5px; font-weight: 500; }
+    .bio-affil { margin-top: 2px; color: var(--faint); font-size: 12.5px; }
+    .bio-text { margin-top: 18px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .bio-text p + p { margin-top: 9px; }
+    .bio-text strong { color: var(--text); font-weight: 600; }
+    .bio-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .tag.current { color: #fff; background: var(--accent); }
+    .quick-facts { margin-top: 14px; color: var(--faint); font-size: 12px; letter-spacing: .01em; }
+    .bio-icons { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
+    .bio-icons a, .bio-icons span {
+      color: var(--muted);
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bio-icons a:hover { color: var(--accent); text-decoration: none; }
+    .bio-icons i { font-size: 17px; }
+
+    /* Updates */
+    .updates-card {
+      position: relative;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-height: 420px;
+      overflow: hidden;
+    }
+    .updates-scroll {
+      max-height: 420px;
+      overflow-y: auto;
+      padding: 20px 20px 52px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-strong) transparent;
+    }
+    .updates-scroll::-webkit-scrollbar { width: 6px; }
+    .updates-scroll::-webkit-scrollbar-track { background: transparent; }
+    .updates-scroll::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+    .updates-scroll:hover::-webkit-scrollbar-thumb { background: var(--faint); }
+    .updates-top {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--accent);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity .2s, visibility .2s, transform .2s, background-color .2s, color .2s;
+      z-index: 2;
+    }
+    .updates-top.visible { opacity: 1; visibility: visible; transform: none; }
+    .updates-top:hover { background: var(--accent); color: #fff; }
+    .updates-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--faint);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .updates-title::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .update-item { display: block; padding: 13px 0; border-bottom: 1px solid var(--border); color: inherit; }
+    .update-item:last-child { border-bottom: 0; padding-bottom: 2px; }
+    .update-item:hover { text-decoration: none; }
+    .update-date { color: var(--faint); font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .update-title { margin-top: 4px; color: var(--text); font-size: 13.5px; font-weight: 600; line-height: 1.45; }
+    .update-item:hover .update-title { color: var(--accent); }
+    .update-desc { margin-top: 3px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+
+    /* Sections */
+    .section { padding-top: 46px; }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 0 0 16px;
+      padding-bottom: 0;
+      border-bottom: 0;
+      color: var(--text);
+      font-family: var(--display-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .section-heading .section-icon { display: none; }
+    .section-heading .section-title {
+      text-decoration: underline;
+      text-decoration-color: #4c1d95;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 7px;
+    }
+    :root[data-theme="dark"] .section-heading .section-title { text-decoration-color: #a78bfa; }
+
+    /* News */
+    .news-list { margin: 0; padding-left: 22px; }
+    .news-list li { padding-left: 3px; margin-bottom: 8px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .news-list li::marker { color: var(--faint); }
+    .news-date { color: var(--faint); font-size: 12.5px; font-style: italic; font-variant-numeric: tabular-nums; white-space: nowrap; margin-right: 8px; }
+    .venue.model { color: var(--accent); background: var(--accent-soft); }
+
+
+    /* Education */
+    .edu-list { display: flex; flex-direction: column; gap: 26px; }
+    .edu-item { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 18px; align-items: center; }
+    .edu-item--sustech .edu-logo { transform: translateY(-14px); }
+    .edu-logo { width: 52px; height: 52px; object-fit: contain; display: block; }
+    .edu-body { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 18px; align-items: start; min-width: 0; }
+    .edu-main { grid-column: 1; grid-row: 1; min-width: 0; }
+    .edu-school { color: var(--text); font-size: 15px; font-weight: 600; line-height: 1.35; }
+    .edu-date { grid-column: 2; grid-row: 1; color: var(--faint); font-size: 12.5px; line-height: 1.4; text-align: right; white-space: nowrap; }
+    .edu-date-note { display: block; margin-top: 1px; color: var(--faint); font-size: 11.5px; }
+    .edu-degree { margin-top: 2px; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+    .edu-dept { color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .edu-loc { margin-top: 1px; color: var(--faint); font-size: 12.5px; line-height: 1.5; }
+    .edu-extra { margin-top: 3px; color: var(--faint); font-size: 12.5px; line-height: 1.5; }
+    .edu-extra--full { grid-column: 1 / -1; }
+
+    /* Education / Experience */
+    .entry { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .entry:last-child { border-bottom: 0; }
+    .entry--plain { grid-template-columns: 1fr; }
+    .entry-logo--penn { transform: scale(1.15); }
+    .entry-logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+    .entry-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
+    .entry-title { color: var(--text); font-size: 15px; font-weight: 600; }
+    .entry-date { color: var(--faint); font-size: 12px; white-space: nowrap; }
+    .entry-role { margin-top: 2px; color: var(--muted); font-size: 13px; }
+    .entry-loc { color: var(--faint); font-size: 12px; }
+    .entry ul { margin: 8px 0 0 17px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .entry li + li { margin-top: 4px; }
+
+    /* Publications */
+    .pub-item { padding: 18px 20px; margin-bottom: 12px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; }
+    .pub-item:last-child { border-bottom: 1px solid var(--border); margin-bottom: 0; }
+    .pub-title { color: var(--text); font-size: 14.5px; font-weight: 600; line-height: 1.5; }
+    .pub-title a { color: var(--text); }
+    .pub-title a:hover { color: var(--accent); text-decoration: none; }
+    .pub-authors { margin-top: 4px; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .pub-authors strong { color: var(--accent); font-weight: 600; }
+    .pub-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 7px; color: var(--faint); font-size: 11.5px; }
+    .venue { display: inline-block; padding: 2px 7px; border-radius: 5px; color: #fff; background: var(--accent); font-size: 10.5px; font-weight: 600; }
+    .venue.preprint { color: #6b5536; background: #f1e7d7; }
+    .venue.journal { color: #6b5536; background: #eee7dc; }
+    .venue.report { color: #fff; background: #6b5536; }
+    .pub-links { display: inline-flex; gap: 10px; }
+    .pub-links a { color: var(--accent); font-weight: 500; }
+
+    /* Contact / footer */
+    .contact-block { padding: 8px 0 0; }
+    .contact-grid { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 8px; align-items: start; }
+    .contact-label { color: var(--faint); font-size: 13px; padding-top: 2px; }
+    .contact-list { list-style: none; display: grid; gap: 7px; }
+    .contact-list a { font-size: 13.5px; }
+    footer { margin-top: 54px; border-top: 1px solid var(--border); padding: 22px 0 34px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 22px; color: var(--faint); font-size: 12px; text-align: left; }
+    .footer-inner a { color: var(--accent); font-weight: 500; }
+    .back-to-top { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+    @media (max-width: 980px) {
+      .layout { padding: 28px 22px 50px; }
+      .profile-sidebar { position: static; transform: none; width: 100%; max-width: 420px; margin: 0 auto 32px; }
+      .sidebar-photo { width: 160px; height: 160px; }
+      .content { width: auto; margin-left: 0; }
+      .content .section { margin-bottom: 26px; }
+      #nav-links { position: static; transform: none; margin-left: auto; }
+      .theme-toggle.floating { top: 12px; right: 12px; }
+      .footer-inner { justify-content: center; text-align: center; }
+      body { padding-top: 64px; }
+    }
+    @media (max-width: 640px) {
+      .container, .nav-container { padding: 0 18px; }
+      footer { padding-left: 18px; padding-right: 18px; }
+      .nav-container { height: auto; min-height: 56px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 8px; }
+      #nav-links { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; gap: 4px; }
+      body { padding-top: 108px; }
+      .hero { padding-top: 24px; }
+      .profile-row { align-items: flex-start; gap: 15px; }
+      .profile-photo { width: 92px; height: 92px; }
+      .hero h1 { font-size: 1.6rem; }
+      .news-row { grid-template-columns: 1fr; gap: 2px; }
+      .news-date { padding-top: 0; }
+      .entry-head { flex-direction: column; gap: 2px; }
+      .entry-date { white-space: normal; }
+      .contact-grid { grid-template-columns: 1fr; gap: 5px; }
+    }
+    @media print {
+      #navbar, .theme-toggle, .updates-card, footer { display: none; }
+      body { background: #fff; color: #111; }
+      .hero-card { box-shadow: none; border-color: #ddd; }
+      .section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="site">
+  <nav id="navbar">
+    <div class="nav-container">
+      <a class="nav-brand" href="#top">Jiaheng Zheng</a>
+      <ul id="nav-links">
+        <li><a href="#about" class="active">About Me</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Project</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#honors">Honors</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav-theme"><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="4"></circle>
+                      <line x1="12" y1="2" x2="12" y2="4.5"></line>
+                      <line x1="12" y1="19.5" x2="12" y2="22"></line>
+                      <line x1="2" y1="12" x2="4.5" y2="12"></line>
+                      <line x1="19.5" y1="12" x2="22" y2="12"></line>
+                      <line x1="4.9" y1="4.9" x2="6.7" y2="6.7"></line>
+                      <line x1="17.3" y1="17.3" x2="19.1" y2="19.1"></line>
+                      <line x1="4.9" y1="19.1" x2="6.7" y2="17.3"></line>
+                      <line x1="17.3" y1="6.7" x2="19.1" y2="4.9"></line>
+                    </svg>
+                  </button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <aside class="profile-sidebar">
+      <img class="sidebar-photo" src="images/self-photo-new-1.jpg" alt="Jiaheng Zheng">
+      <h1 class="sidebar-name">Jiaheng Zheng</h1>
+      <div class="sidebar-role">Undergraduate Student</div>
+      <div class="sidebar-school">Southern University of Science and Technology</div>
+      <a class="sidebar-email" href="mailto:jiaheng914@gmail.com">jiaheng914@gmail.com</a>
+      <div class="sidebar-icons">
+        <span title="Google Scholar — coming soon" aria-label="Google Scholar (coming soon)"><i class="ai ai-google-scholar"></i></span>
+        <a href="https://github.com/zhengjiaheng39-tech" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:12411408@mail.sustech.edu.cn" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="cv.html" target="_blank" rel="noopener" title="CV"><i class="fa-regular fa-file-lines"></i></a>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section id="about" class="section">
+        <div class="section-heading"><span class="section-icon" aria-hidden="true">🔬</span> <span class="section-title">About Me</span></div>
+        <p>I am an undergraduate student in the <strong>Department of Electrical and Electronic Engineering (EEE)</strong> at <strong>Southern University of Science and Technology (SUSTech)</strong>, Shenzhen, China.</p>
+        <p>I am also a member of the <strong>Apex Honors Class of Basic Sciences (Physics)</strong> and serve as the <strong>class monitor</strong> of the <strong>Wolong Class (Electronic Information)</strong> in the Department of EEE.</p>
+      </section>
+
+    <section id="news" class="section">
+      <h2 class="section-heading"><span class="section-icon" aria-hidden="true">🔥</span> <span class="section-title">News</span></h2>
+      <ul class="news-list">
+        <li><span class="news-date">2026.01–02</span> Attended the <strong>Winter International Academy</strong> at the <a href="https://www.utexas.edu/" target="_blank" rel="noopener">University of Texas at Austin</a>.</li>
+        <li><span class="news-date">2025.09</span> Received the <strong>First-Class Scholarship</strong> from <a href="https://www.sustech.edu.cn/" target="_blank" rel="noopener">SUSTech</a>.</li>
+        <li><span class="news-date">2024.08</span> Joined <a href="https://www.sustech.edu.cn/" target="_blank" rel="noopener">Southern University of Science and Technology (SUSTech)</a>.</li>
+      </ul>
+    </section>
+
+    <section id="education" class="section">
+      <div class="section-heading"><span class="section-icon" aria-hidden="true">🎓</span> <span class="section-title">Education</span></div>
+      <div class="edu-list">
+        <div class="edu-item edu-item--sustech">
+          <img class="edu-logo" src="images/sustech.png" alt="SUSTech logo">
+          <div class="edu-body">
+            <div class="edu-main">
+              <div class="edu-school">Southern University of Science and Technology</div>
+              <div class="edu-degree">B.E. in Optoelectronic Information Science and Engineering</div>
+              <div class="edu-dept">Department of Electrical and Electronic Engineering (EEE)</div>
+              <div class="edu-extra">GPA: 3.94/4 · Rank: 2/42</div>
+            </div>
+            <div class="edu-extra edu-extra--full">Member, Apex Honors Class of Basic Sciences (Physics); Class Monitor, Wolong Class (EE).</div>
+            <div class="edu-date">Sep. 2024 – Jun. 2028<span class="edu-date-note">Expected</span></div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <img class="edu-logo" src="images/ut-austin.png" alt="UT Austin logo">
+          <div class="edu-body">
+            <div class="edu-main">
+              <div class="edu-school">University of Texas at Austin</div>
+              <div class="edu-degree">Winter International Academy</div>
+              <div class="edu-loc">Austin, TX, USA</div>
+            </div>
+            <div class="edu-date">Jan. 2026 – Feb. 2026</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <img class="edu-logo" src="images/upenn.png" alt="University of Pennsylvania logo">
+          <div class="edu-body">
+            <div class="edu-main">
+              <div class="edu-school">University of Pennsylvania</div>
+              <div class="edu-degree">Incoming Visiting Student, IGSP Program</div>
+              <div class="edu-loc">Philadelphia, PA, USA</div>
+            </div>
+            <div class="edu-date">Jan. 2027 – TBD</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="section-heading"><span class="section-icon" aria-hidden="true">💼</span> <span class="section-title">Project</span></div>
+    </section>
+
+    <section id="publications" class="section">
+      <div class="section-heading"><span class="section-icon" aria-hidden="true">📝</span> <span class="section-title">Publication</span></div>
+    </section>
+
+    <section id="service" class="section">
+      <div class="section-heading"><span class="section-icon" aria-hidden="true">🤝</span> <span class="section-title">Service</span></div>
+      <div class="entry entry--plain">
+        <div class="entry-role">Shenzhen Volunteer.</div>
+      </div>
+    </section>
+
+    <section id="honors" class="section">
+      <div class="section-heading"><span class="section-icon" aria-hidden="true">🏅</span> <span class="section-title">Honors</span></div>
+      <div class="entry entry--plain">
+        <div><div class="entry-title">First-Class Scholarship, SUSTech</div><div class="entry-role">2025 · Southern University of Science and Technology</div></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-heading"><span class="section-icon" aria-hidden="true">📮</span> <span class="section-title">Contact</span></div>
+      <div class="contact-block">
+        <div class="contact-grid">
+          <div class="contact-label">Email:</div>
+          <ul class="contact-list">
+            <li><a href="mailto:12411408@mail.sustech.edu.cn">12411408@mail.sustech.edu.cn</a></li>
+            <li><a href="mailto:jiaheng9@sas.upenn.edu">jiaheng9@sas.upenn.edu</a></li>
+            <li><a href="mailto:jiaheng@utexas.edu">jiaheng@utexas.edu</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Jiaheng Zheng · <a href="https://zhengjiaheng39-tech.github.io">zhengjiaheng39-tech.github.io</a> · <span id="last-updated">Updated October 2026</span></span>
+      <a class="back-to-top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  </div>
+
+  <script>
+    (function () {
+      var box = document.querySelector('.updates-scroll');
+      var top = document.getElementById('updates-top');
+      if (box && top) {
+        var syncUpdatesTop = function () {
+          var canScroll = box.scrollHeight > box.clientHeight + 4;
+          var atBottom = box.scrollTop + box.clientHeight >= box.scrollHeight - 8;
+          top.classList.toggle('visible', canScroll && atBottom);
+        };
+        box.addEventListener('scroll', syncUpdatesTop, { passive: true });
+        top.addEventListener('click', function () {
+          box.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        window.addEventListener('resize', syncUpdatesTop);
+        syncUpdatesTop();
+      }
+    })();
+    (function () {
+      var links = document.querySelectorAll('#nav-links a[href^="#"]');
+      links.forEach(function (link) {
+        link.addEventListener('click', function () {
+          links.forEach(function (item) { item.classList.remove('active'); });
+          link.classList.add('active');
+        });
+      });
+    })();
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) {}
+        });
+      }
+      var el = document.getElementById('last-updated');
+      if (el) {
+        var d = new Date(document.lastModified);
+        if (isNaN(d.getTime())) d = new Date();
+        el.textContent = 'Updated ' + d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      }
+    })();
+  </script>
+</body>
+</html>
